@@ -1,0 +1,96 @@
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-03-02T21:50:33.494Z"}
+{"level":"info","message":"Email monitoring service started","timestamp":"2025-03-02T21:50:33.518Z"}
+{"level":"info","message":"Daily summary job scheduled","timestamp":"2025-03-02T21:50:33.520Z"}
+{"address":"127.0.0.1","code":"ECONNREFUSED","errno":-61,"level":"error","message":"IMAP connection error: connect ECONNREFUSED 127.0.0.1:143","port":143,"source":"socket","stack":"Error: connect ECONNREFUSED 127.0.0.1:143\n    at __node_internal_captureLargerStackTrace2 (https://zp1v56uxy8rdx5ypatb0ockcb9tr6a-oci3.w-credentialless-staticblitz.com/builtins.8cb5228f.js:101:5335)\n    at __node_internal_exceptionWithHostPort2 (https://zp1v56uxy8rdx5ypatb0ockcb9tr6a-oci3.w-credentialless-staticblitz.com/builtins.8cb5228f.js:101:7017)\n    at _0x32184c.afterConnect [as oncomplete] (https://zp1v56uxy8rdx5ypatb0ockcb9tr6a-oci3.w-credentialless-staticblitz.com/builtins.8cb5228f.js:285:9237)\n    at https://zp1v56uxy8rdx5ypatb0ockcb9tr6a-oci3.w-credentialless-staticblitz.com/blitz.31ca1d38.js:40:201241","syscall":"connect","timestamp":"2025-03-02T21:50:33.555Z"}
+{"level":"info","message":"Starting in DEMO MODE - no actual email connection will be made","timestamp":"2025-03-02T21:57:20.879Z"}
+{"level":"info","message":"Adding demo emails to the system","timestamp":"2025-03-02T21:57:20.887Z"}
+{"level":"info","message":"Email stored: URGENT: Project deadline moved up","timestamp":"2025-03-02T21:57:20.888Z"}
+{"level":"info","message":"Demo email categorized as: Urgent","timestamp":"2025-03-02T21:57:20.913Z"}
+{"level":"info","message":"Response drafted for email type: URGENT","timestamp":"2025-03-02T21:57:20.917Z"}
+{"level":"info","message":"Response drafted for demo email","timestamp":"2025-03-02T21:57:20.921Z"}
+{"level":"info","message":"Moving email \"URGENT: Project deadline moved up\" to folder: Urgent","timestamp":"2025-03-02T21:57:20.922Z"}
+{"level":"info","message":"Flagging email \"URGENT: Project deadline moved up\" for follow-up by 2025-03-04","timestamp":"2025-03-02T21:57:20.932Z"}
+{"level":"info","message":"Moving email \"URGENT: Project deadline moved up\" to folder: Follow Up","timestamp":"2025-03-02T21:57:20.933Z"}
+{"level":"info","message":"Email organized: URGENT: Project deadline moved up","timestamp":"2025-03-02T21:57:20.935Z"}
+{"level":"info","message":"ALERT [URGENT]: URGENT email from boss@company.com: \"URGENT: Project deadline moved up\"","timestamp":"2025-03-02T21:57:20.936Z"}
+{"level":"info","message":"Alert triggered for demo email","timestamp":"2025-03-02T21:57:20.937Z"}
+{"level":"info","message":"Email stored: Meeting invitation: Quarterly review","timestamp":"2025-03-02T21:57:20.938Z"}
+{"level":"info","message":"Demo email categorized as: Important","timestamp":"2025-03-02T21:57:20.938Z"}
+{"level":"info","message":"Response drafted for email type: MEETING_REQUEST","timestamp":"2025-03-02T21:57:20.939Z"}
+{"level":"info","message":"Response drafted for demo email","timestamp":"2025-03-02T21:57:20.940Z"}
+{"level":"info","message":"Moving email \"Meeting invitation: Quarterly review\" to folder: Important","timestamp":"2025-03-02T21:57:20.942Z"}
+{"level":"info","message":"Email organized: Meeting invitation: Quarterly review","timestamp":"2025-03-02T21:57:20.942Z"}
+{"level":"info","message":"Email stored: Important client feedback","timestamp":"2025-03-02T21:57:20.944Z"}
+{"level":"info","message":"Demo email categorized as: Important","timestamp":"2025-03-02T21:57:20.945Z"}
+{"level":"info","message":"Response drafted for email type: MEETING_REQUEST","timestamp":"2025-03-02T21:57:20.950Z"}
+{"level":"info","message":"Response drafted for demo email","timestamp":"2025-03-02T21:57:20.951Z"}
+{"level":"info","message":"Moving email \"Important client feedback\" to folder: Important","timestamp":"2025-03-02T21:57:20.951Z"}
+{"level":"info","message":"Flagging email \"Important client feedback\" for follow-up by 2025-03-04","timestamp":"2025-03-02T21:57:20.952Z"}
+{"level":"info","message":"Moving email \"Important client feedback\" to folder: Follow Up","timestamp":"2025-03-02T21:57:20.953Z"}
+{"level":"info","message":"Email organized: Important client feedback","timestamp":"2025-03-02T21:57:20.953Z"}
+{"level":"info","message":"ALERT [VIP]: VIP contact client@important.com sent: \"Important client feedback\"","timestamp":"2025-03-02T21:57:20.954Z"}
+{"level":"info","message":"Alert triggered for demo email","timestamp":"2025-03-02T21:57:20.954Z"}
+{"level":"info","message":"Email stored: Weekly newsletter","timestamp":"2025-03-02T21:57:20.955Z"}
+{"level":"info","message":"Demo email categorized as: Low Priority","timestamp":"2025-03-02T21:57:20.955Z"}
+{"level":"info","message":"Moving email \"Weekly newsletter\" to folder: Low Priority","timestamp":"2025-03-02T21:57:20.956Z"}
+{"level":"info","message":"Email organized: Weekly newsletter","timestamp":"2025-03-02T21:57:20.957Z"}
+{"level":"info","message":"Email stored: Follow up on previous discussion","timestamp":"2025-03-02T21:57:20.958Z"}
+{"level":"info","message":"Demo email categorized as: Regular","timestamp":"2025-03-02T21:57:20.963Z"}
+{"level":"info","message":"Moving email \"Follow up on previous discussion\" to folder: Regular","timestamp":"2025-03-02T21:57:20.965Z"}
+{"level":"info","message":"Flagging email \"Follow up on previous discussion\" for follow-up by 2025-03-06","timestamp":"2025-03-02T21:57:20.966Z"}
+{"level":"info","message":"Moving email \"Follow up on previous discussion\" to folder: Follow Up","timestamp":"2025-03-02T21:57:20.966Z"}
+{"level":"info","message":"Email organized: Follow up on previous discussion","timestamp":"2025-03-02T21:57:20.966Z"}
+{"level":"info","message":"Email stored: Your account security alert","timestamp":"2025-03-02T21:57:20.967Z"}
+{"level":"info","message":"Demo email categorized as: Urgent","timestamp":"2025-03-02T21:57:20.968Z"}
+{"level":"info","message":"Response drafted for email type: GENERAL","timestamp":"2025-03-02T21:57:20.969Z"}
+{"level":"info","message":"Response drafted for demo email","timestamp":"2025-03-02T21:57:20.969Z"}
+{"level":"info","message":"Moving email \"Your account security alert\" to folder: Urgent","timestamp":"2025-03-02T21:57:20.970Z"}
+{"level":"info","message":"Email organized: Your account security alert","timestamp":"2025-03-02T21:57:20.971Z"}
+{"level":"info","message":"ALERT [URGENT]: URGENT email from security@service.com: \"Your account security alert\"","timestamp":"2025-03-02T21:57:20.971Z"}
+{"level":"info","message":"Alert triggered for demo email","timestamp":"2025-03-02T21:57:20.972Z"}
+{"level":"info","message":"Email stored: Question about the API documentation","timestamp":"2025-03-02T21:57:20.976Z"}
+{"level":"info","message":"Demo email categorized as: Regular","timestamp":"2025-03-02T21:57:20.976Z"}
+{"level":"info","message":"Moving email \"Question about the API documentation\" to folder: Regular","timestamp":"2025-03-02T21:57:20.978Z"}
+{"level":"info","message":"Email organized: Question about the API documentation","timestamp":"2025-03-02T21:57:20.979Z"}
+{"level":"info","message":"Email stored: Team lunch next Friday","timestamp":"2025-03-02T21:57:20.979Z"}
+{"level":"info","message":"Demo email categorized as: Regular","timestamp":"2025-03-02T21:57:20.980Z"}
+{"level":"info","message":"Moving email \"Team lunch next Friday\" to folder: Regular","timestamp":"2025-03-02T21:57:20.980Z"}
+{"level":"info","message":"Flagging email \"Team lunch next Friday\" for follow-up by 2025-03-06","timestamp":"2025-03-02T21:57:20.981Z"}
+{"level":"info","message":"Moving email \"Team lunch next Friday\" to folder: Follow Up","timestamp":"2025-03-02T21:57:20.983Z"}
+{"level":"info","message":"Email organized: Team lunch next Friday","timestamp":"2025-03-02T21:57:20.983Z"}
+{"level":"info","message":"Email stored: New product launch timeline","timestamp":"2025-03-02T21:57:20.983Z"}
+{"level":"info","message":"Demo email categorized as: Important","timestamp":"2025-03-02T21:57:20.984Z"}
+{"level":"info","message":"Response drafted for email type: GENERAL","timestamp":"2025-03-02T21:57:20.986Z"}
+{"level":"info","message":"Response drafted for demo email","timestamp":"2025-03-02T21:57:20.986Z"}
+{"level":"info","message":"Moving email \"New product launch timeline\" to folder: Important","timestamp":"2025-03-02T21:57:20.987Z"}
+{"level":"info","message":"Flagging email \"New product launch timeline\" for follow-up by 2025-03-04","timestamp":"2025-03-02T21:57:20.988Z"}
+{"level":"info","message":"Moving email \"New product launch timeline\" to folder: Follow Up","timestamp":"2025-03-02T21:57:20.988Z"}
+{"level":"info","message":"Email organized: New product launch timeline","timestamp":"2025-03-02T21:57:21.029Z"}
+{"level":"info","message":"Email stored: Office supplies order confirmation","timestamp":"2025-03-02T21:57:21.030Z"}
+{"level":"info","message":"Demo email categorized as: Low Priority","timestamp":"2025-03-02T21:57:21.031Z"}
+{"level":"info","message":"Moving email \"Office supplies order confirmation\" to folder: Low Priority","timestamp":"2025-03-02T21:57:21.032Z"}
+{"level":"info","message":"Email organized: Office supplies order confirmation","timestamp":"2025-03-02T21:57:21.033Z"}
+{"level":"info","message":"Action item stored: Prepare project status report","timestamp":"2025-03-02T21:57:21.034Z"}
+{"level":"info","message":"Action item stored: Review client proposal","timestamp":"2025-03-02T21:57:21.034Z"}
+{"level":"info","message":"Action item stored: Schedule team meeting","timestamp":"2025-03-02T21:57:21.035Z"}
+{"level":"info","message":"Action item stored: Respond to API documentation question","timestamp":"2025-03-02T21:57:21.035Z"}
+{"level":"info","message":"Action item stored: Update project timeline","timestamp":"2025-03-02T21:57:21.035Z"}
+{"level":"info","message":"Deadline stored: Project Alpha delivery","timestamp":"2025-03-02T21:57:21.036Z"}
+{"level":"info","message":"Deadline stored: Quarterly report submission","timestamp":"2025-03-02T21:57:21.036Z"}
+{"level":"info","message":"Deadline stored: Budget planning meeting","timestamp":"2025-03-02T21:57:21.037Z"}
+{"level":"info","message":"Deadline stored: Team lunch","timestamp":"2025-03-02T21:57:21.037Z"}
+{"level":"info","message":"Deadline stored: Client presentation","timestamp":"2025-03-02T21:57:21.038Z"}
+{"level":"info","message":"Demo data loaded successfully","timestamp":"2025-03-02T21:57:21.039Z"}
+{"level":"info","message":"Server running on port 3000","timestamp":"2025-03-02T21:57:21.045Z"}
+{"level":"info","message":"Demo data loaded","timestamp":"2025-03-02T21:57:21.046Z"}
+{"level":"info","message":"Daily summary job scheduled","timestamp":"2025-03-02T21:57:21.048Z"}
+{"level":"info","message":"Visit http://localhost:3000 to view the dashboard","timestamp":"2025-03-02T21:57:21.048Z"}
+{"date":"2025-03-03","level":"info","message":"Daily summary generated","timestamp":"2025-03-02T21:57:21.748Z"}
+{"date":"2025-03-03","level":"info","message":"Daily summary generated","timestamp":"2025-03-02T21:57:27.660Z"}
+{"date":"2025-03-03","level":"info","message":"Daily summary generated","timestamp":"2025-03-02T21:57:37.879Z"}
+{"date":"2025-03-03","level":"info","message":"Daily summary generated","timestamp":"2025-03-02T21:57:37.943Z"}
+{"date":"2025-03-03","level":"info","message":"Daily summary generated","timestamp":"2025-03-02T21:57:54.594Z"}
+{"date":"2025-03-03","level":"info","message":"Daily summary generated","timestamp":"2025-03-02T21:57:59.696Z"}
+{"date":"2025-03-03","level":"info","message":"Daily summary generated","timestamp":"2025-03-02T21:58:20.453Z"}
+{"date":"2025-03-03","level":"info","message":"Daily summary generated","timestamp":"2025-03-02T21:58:30.024Z"}
+{"date":"2025-03-03","level":"info","message":"Daily summary generated","timestamp":"2025-03-02T22:00:27.851Z"}

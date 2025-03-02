@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <div class="container-fluid">
+    <div class="row">
+      <%- include('partials/sidebar') %>
+
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Emails</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+              <% if (demoMode) { %>
+                <span class="badge bg-warning text-dark">Demo Mode</span>
+              <% } %>
+            </div>
+            <div class="dropdown">
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-filter"></i> Filter
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                <li><a class="dropdown-item" href="#" data-filter="all">All</a></li>
+                <li><a class="dropdown-item" href="#" data-filter="Urgent">Urgent</a></li>
+                <li><a class="dropdown-item" href="#" data-filter="Important">Important</a></li>
+                <li><a class="dropdown-item" href="#" data-filter="Regular">Regular</a></li>
+                <li><a class="dropdown-item" href="#" data-filter="Low Priority">Low Priority</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-striped table-hover" id="emailsTable">
+            <thead>
+              <tr>
+                <th>From</th>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% emails.forEach(email => { %>
+                <tr data-category="<%= email.category %>">
+                  <td><%= email.from.split('<')[0] || email.from %></td>
+                  <td><%= email.subject %></td>
+                  <td><%= new Date(email.date).toLocaleString() %></td>
+                  <td>
+                    <% if (email.category === 'Urgent') { %>
+                      <span class="badge bg-danger">Urgent</span>
+                    <% } else if (email.category === 'Important') { %>
+                      <span class="badge bg-warning text-dark">Important</span>
+                    <% } else if (email.category === 'Regular') { %>
+                      <span class="badge bg-primary">Regular</span>
+                    <% } else { %>
+                      <span class="badge bg-secondary">Low Priority</span>
+                    <% } %>
+                  </td>
+                  <td>
+                    <button class="btn btn-sm btn-outline-primary view-email" data-bs-toggle="modal" data-bs-target="#emailModal" data-email-id="<%= email.id %>">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Email Modal -->
+        <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="emailModalLabel">Email Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div id="emailDetails">
+                  <div class="mb-3">
+                    <strong>From:</strong> <span id="emailFrom"></span>
+                  </div>
+                  <div class="mb-3">
+                    <strong>To:</strong> <span id="emailTo"></span>
+                  </div>
+                  <div class="mb-3">
+                    <strong>Subject:</strong> <span id="emailSubject"></span>
+                  </div>
+                  <div class="mb-3">
+                    <strong>Date:</strong> <span id="emailDate"></span>
+                  </div>
+                  <div class="mb-3">
+                    <strong>Category:</strong> <span id="emailCategory"></span>
+                  </div>
+                  <hr>
+                  <div class="mb-3">
+                    <strong>Message:</strong>
+                    <div id="emailBody" class="mt-2 p-3 bg-light rounded"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="replyButton">Reply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Filter emails
+      const filterLinks = document.querySelectorAll('[data-filter]');
+      filterLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const filter = this.getAttribute('data-filter');
+          const rows = document.querySelectorAll('#emailsTable tbody tr');
+          
+          rows.forEach(row => {
+            if (filter === 'all' || row.getAttribute('data-category') === filter) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // View email details
+      const viewButtons = document.querySelectorAll('.view-email');
+      viewButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const emailId = this.getAttribute('data-email-id');
+          const row = this.closest('tr');
+          
+          document.getElementById('emailFrom').textContent = row.cells[0].textContent;
+          document.getElementById('emailSubject').textContent = row.cells[1].textContent;
+          document.getElementById('emailDate').textContent = row.cells[2].textContent;
+          document.getElementById('emailCategory').textContent = row.cells[3].textContent;
+          
+          // In a real app, we would fetch the full email details from the server
+          // For demo purposes, we'll use the data we have
+          document.getElementById('emailTo').textContent = 'you@example.com';
+          
+          // Find the email body from our data
+          fetch('/api/emails')
+            .then(response => response.json())
+            .then(emails => {
+              const email = emails.find(e => e.id === emailId);
+              if (email) {
+                document.getElementById('emailBody').textContent = email.body;
+              }
+            });
+        });
+      });
+
+      // Reply button
+      document.getElementById('replyButton').addEventListener('click', function() {
+        alert('In a real application, this would open a compose window with a pre-filled reply.');
+      });
+    });
+  </script>
+</body>
+</html>

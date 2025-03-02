@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <div class="container-fluid">
+    <div class="row">
+      <%- include('partials/sidebar') %>
+
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Daily Summary</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+              <% if (demoMode) { %>
+                <span class="badge bg-warning text-dark">Demo Mode</span>
+              <% } %>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary">
+              <i class="bi bi-printer"></i> Print
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary ms-2">
+              <i class="bi bi-download"></i> Export
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">Summary for <%= summary.date %></h5>
+              </div>
+              <div class="card-body">
+                <div class="row mb-4">
+                  <div class="col-md-3">
+                    <div class="card text-white bg-primary">
+                      <div class="card-body text-center">
+                        <h6 class="card-title">Total Emails</h6>
+                        <p class="card-text display-4"><%= summary.stats.total %></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card text-white bg-success">
+                      <div class="card-body text-center">
+                        <h6 class="card-title">Action Items</h6>
+                        <p class="card-text display-4"><%= summary.actionItems.length %></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card text-white bg-warning">
+                      <div class="card-body text-center">
+                        <h6 class="card-title">Deadlines</h6>
+                        <p class="card-text display-4"><%= summary.upcomingDeadlines.length %></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="card text-white bg-danger">
+                      <div class="card-body text-center">
+                        <h6 class="card-title">Urgent Emails</h6>
+                        <p class="card-text display-4"><%= summary.stats.categories.urgent %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <h5 class="mb-3">Email Distribution</h5>
+                <div class="mb-4">
+                  <canvas id="emailDistributionChart" height="100"></canvas>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5 class="mb-3">Action Items</h5>
+                    <ul class="list-group mb-4">
+                      <% if (summary.actionItems.length === 0) { %>
+                        <li class="list-group-item">No action items for today.</li>
+                      <% } else { %>
+                        <% summary.actionItems.forEach((item, index) => { %>
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <%= item.subject %>
+                            <% if (item.deadline) { %>
+                              <span class="badge bg-primary rounded-pill">
+                                <%= new Date(item.deadline).toLocaleDateString() %>
+                              </span>
+                            <% } %>
+                          </li>
+                        <% }) %>
+                      <% } %>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <h5 class="mb-3">Upcoming Deadlines</h5>
+                    <ul class="list-group mb-4">
+                      <% if (summary.upcomingDeadlines.length === 0) { %>
+                        <li class="list-group-item">No upcoming deadlines.</li>
+                      <% } else { %>
+                        <% summary.upcomingDeadlines.forEach((deadline, index) => { %>
+                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <%= deadline.subject %>
+                            <span class="badge bg-primary rounded-pill">
+                              <%= deadline.date %>
+                            </span>
+                          </li>
+                        <% }) %>
+                      <% } %>
+                    </ul>
+                  </div>
+                </div>
+
+                <h5 class="mb-3">Formatted Summary</h5>
+                <div class="bg-light p-3 rounded">
+                  <pre class="mb-0"><%= formattedSummary %></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Email distribution chart
+      const ctx = document.getElementById('emailDistributionChart').getContext('2d');
+      const emailDistributionChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Urgent', 'Important', 'Regular', 'Low Priority'],
+          datasets: [{
+            data: [
+              <%= summary.stats.categories.urgent %>,
+              <%= summary.stats.categories.important %>,
+              <%= summary.stats.categories.regular %>,
+              <%= summary.stats.categories.lowPriority %>
+            ],
+            backgroundColor: [
+              '#dc3545', // Danger/Urgent
+              '#ffc107', // Warning/Important
+              '#0d6efd', // Primary/Regular
+              '#6c757d'  // Secondary/Low Priority
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'right',
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <div class="container-fluid">
+    <div class="row">
+      <%- include('partials/sidebar') %>
+
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Upcoming Deadlines</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+              <% if (demoMode) { %>
+                <span class="badge bg-warning text-dark">Demo Mode</span>
+              <% } %>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary">
+              <i class="bi bi-plus-lg"></i> Add Deadline
+            </button>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">Calendar View</h5>
+              </div>
+              <div class="card-body">
+                <div id="calendar" class="p-3">
+                  <div class="d-flex flex-wrap">
+                    <% 
+                      const today = new Date();
+                      const daysToShow = 14;
+                      
+                      for (let i = 0; i < daysToShow; i++) {
+                        const currentDate = new Date(today);
+                        currentDate.setDate(today.getDate() + i);
+                        
+                        // Check if any deadlines fall on this date
+                        const deadlinesOnDay = deadlines.filter(deadline => {
+                          const deadlineDate = new Date(deadline.date);
+                          return deadlineDate.toDateString() === currentDate.toDateString();
+                        });
+                        
+                        const isToday = currentDate.toDateString() === today.toDateString();
+                        const hasDeadlines = deadlinesOnDay.length > 0;
+                    %>
+                      <div class="calendar-day <%= isToday ? 'today' : '' %> <%= hasDeadlines ? 'has-deadlines' : '' %>" style="width: 120px; height: 120px; border: 1px solid #ddd; margin: 5px; padding: 10px; border-radius: 5px; <%= isToday ? 'background-color: #e6f7ff; border-color: #1890ff;' : '' %> <%= hasDeadlines ? 'border-left: 5px solid #ff4d4f;' : '' %>">
+                        <div class="date-header">
+                          <strong><%= currentDate.toLocaleDateString('en-US', { weekday: 'short' }) %></strong>
+                          <div><%= currentDate.getDate() %>/<%= currentDate.getMonth() + 1 %></div>
+                        </div>
+                        <% if (hasDeadlines) { %>
+                          <div class="deadline-count mt-2">
+                            <span class="badge bg-danger"><%= deadlinesOnDay.length %></span>
+                          </div>
+                          <div class="deadline-preview small text-truncate">
+                            <%= deadlinesOnDay[0].subject %>
+                          </div>
+                        <% } %>
+                      </div>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Event</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Time Remaining</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% deadlines.forEach(deadline => { 
+                const deadlineDate = new Date(deadline.date);
+                const today = new Date();
+                const diffTime = deadlineDate - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+              %>
+                <tr>
+                  <td><%= deadline.subject %></td>
+                  <td><%= deadlineDate.toLocaleDateString() %></td>
+                  <td><%= deadline.description || 'No description' %></td>
+                  <td>
+                    <% if (diffDays < 0) { %>
+                      <span class="badge bg-danger">Overdue</span>
+                    <% } else if (diffDays === 0) { %>
+                      <span class="badge bg-danger">Today</span>
+                    <% } else if (diffDays === 1) { %>
+                      <span class="badge bg-warning text-dark">Tomorrow</span>
+                    <% } else if (diffDays <= 3) { %>
+                      <span class="badge bg-warning text-dark"><%= diffDays %> days</span>
+                    <% } else { %>
+                      <span class="badge bg-primary"><%= diffDays %> days</span>
+                    <% } %>
+                  </td>
+                  <td>
+                    <button class="btn btn-sm btn-outline-primary">
+                      <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
