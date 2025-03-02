@@ -55,19 +55,20 @@ Once running, the assistant will:
 
 Access the web interface at `http://localhost:3000` to view summaries and manage settings.
 
-## API Endpoints
+## Contribution
 
-- `GET /`: Application status
-- `GET /summary`: Get the latest email summary
+Feel free to use
 
-## Security
+## Screenshots
 
-This application requires access to your email account when not in demo mode. For security:
+<img width="959" alt="1" src="https://github.com/user-attachments/assets/32bd9bd4-1ebf-4a0c-9f77-30851db72734" />
 
-- Store credentials securely in the `.env` file (not in version control)
-- Use app-specific passwords when available
-- Consider using OAuth2 authentication for production use
+<img width="959" alt="2" src="https://github.com/user-attachments/assets/a05149c5-f3f8-477e-b5ae-38551ceff43e" />
 
-## License
+<img width="959" alt="3" src="https://github.com/user-attachments/assets/af4338b8-fe94-4f31-b779-46525f39fe58" />
 
-MIT
+<img width="959" alt="4" src="https://github.com/user-attachments/assets/52541d79-3e94-43f2-8521-08cf3c00af6e" />
+
+<img width="959" alt="5" src="https://github.com/user-attachments/assets/3139d0e4-90e2-4ae5-9122-a4c9c47ef539" />
+
+<img width="959" alt="6" src="https://github.com/user-attachments/assets/d6ada2e0-6c76-437e-8cf3-79f2d95de6fd" />
